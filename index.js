@@ -11,7 +11,7 @@ const htmlTemplate = (template, results) => {
 
 
 async function fn() {
-  const rootDir = process.argv[2] ?? __dirname;
+  const rootDir = process.argv[2] ?? process.cwd();
   const songsDir = path.resolve(rootDir, "Songs");
 
   const mapDirs = await fs.readdir(songsDir, {
@@ -50,7 +50,7 @@ async function fn() {
 
   console.log(`Found ${imageFiles.size} images`);
 
-  const model = await nsfw.load('file://./nsfwjs/', { size: 299 });
+  const model = await nsfw.load(`file://${path.resolve(__dirname, 'nsfwjs')}/`, { size: 299 });
 
   const results = [];
   let i = 0;
@@ -78,7 +78,7 @@ async function fn() {
   results.sort((a, b) => b.result.Hentai - a.result.Hentai);
   console.log(results.map(e => `${(100 * e.result.Hentai).toFixed(2)}%: ${e.image}`).join('\n'));
 
-  const template = await fs.readFile('index.html', {encoding:'utf-8'});
+  const template = await fs.readFile(path.resolve(__dirname, 'index.html'), {encoding:'utf-8'});
   const output = htmlTemplate(template, results);
 
   fs.writeFile('results.html', output);
