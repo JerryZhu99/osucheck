@@ -6,7 +6,13 @@ const { promises: fs } = require("fs");
 
 
 const htmlTemplate = (template, results) => {
-    return template.replace('{{results}}', results.map(e => `<a href="file://${e.image}"><div class="grid-item"><div class="rating">${(100 * e.result.Hentai).toFixed(2)}%</div><img src="file://${e.image}" /></div></a>`).join(''));
+    return template.replace('{{results}}', results.map(e => `
+    <a href="file://${e.image}">
+      <div class="grid-item">
+        <div class="rating">${(100 * e.result.Hentai).toFixed(2)}%</div>
+        <img src="file://${e.image}" loading="lazy" />
+      </div>
+    </a>`).join(''));
 }
 
 
