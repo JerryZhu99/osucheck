@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "build": "caxa -i . -o dist/osucheck.exe -e dist -- \"{{caxa}}/node_modules/.bin/node\" \"{{caxa}}/index.js\"",
+    "start": "set TF_CPP_MIN_LOG_LEVEL=2 && node .",
+    "build": "caxa -i . -o dist/osucheck.exe -e dist -e .git -e results.html -- \"{{caxa}}/node_modules/.bin/node\" \"{{caxa}}/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jerry Zhu",
